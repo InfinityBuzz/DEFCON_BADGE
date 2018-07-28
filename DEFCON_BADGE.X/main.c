@@ -3,7 +3,9 @@
 #include "mcc_generated_files/mcc.h"
 void update_seg(int valor);
 void clear(void);
+void states(void);
 
+char state = 1;
 
 
 void interrupt INTERRUPT_InterruptManager (void)
@@ -13,6 +15,7 @@ void interrupt INTERRUPT_InterruptManager (void)
     {
         TMR1_ISR();
         update_seg(10);
+        states();
     }
     else
     {
@@ -41,17 +44,7 @@ void main(void)
 
     while (1)
     {
-        RB_SetHigh();
-        RC_SetHigh();
-        SEG1_Toggle();
-       __delay_ms(10);
-       SEG1_Toggle();
-       SEG2_Toggle();
-       __delay_ms(10);
-       SEG2_Toggle();
-       SEG3_Toggle();
-       __delay_ms(10);
-       SEG3_Toggle();
+        
        
        
        
@@ -62,13 +55,52 @@ void update_seg(int valor){
     clear();
     
     switch(valor){
-        case 1 :
+        case 0:
+            break;
+        case 1:
             RB_SetHigh();
             RC_SetHigh();
+            break;
+        case 2:
+            RA_SetHigh();
+            RB_SetHigh();
+            RG_SetHigh();
+            RE_SetHigh();
+            RD_SetHigh();
+            break;
+        case 3:
+            RA_SetHigh();
+            RB_SetHigh();
+            RG_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        case 9:
+            break;
+            
     }
     
 }
 
 void clear(void){
     
+}
+
+void states(void){
+    
+    state++;
+    
+    if (state >= 3){
+        state = 1;
+    }
 }
