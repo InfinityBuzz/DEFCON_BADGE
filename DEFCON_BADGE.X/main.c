@@ -1,23 +1,26 @@
 
 
 #include "mcc_generated_files/mcc.h"
-void update_seg(char valor);
+void update_seg(char seg, char valor);
 void clear(void);
 void states(void);
 
 char state = 1;
 int count = 0;
-int TH = 2;
+int TH = 1;
+char msg[20];
+int x = 0;
 
 void interrupt INTERRUPT_InterruptManager(void) {
 
     if (INTCONbits.PEIE == 1 && PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF == 1) {
-        
+
         count++;
         if (count >= TH) {
             count = 0;
             states();
         }
+        update_seg(1, msg[x]);
         TMR1_ISR();
     } else {
 
@@ -42,36 +45,23 @@ void main(void) {
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
-    
-    
+
+
     while (1) {
-        update_seg('0');
+        msg[0] = '1';
+        msg[1] = 'A';
+        x = 0;
         __delay_ms(200);
-        update_seg('1');
+        x = 1;
         __delay_ms(200);
-        update_seg('2');
-        __delay_ms(200);
-        update_seg('3');
-        __delay_ms(200);
-        update_seg('4');
-        __delay_ms(200);
-        update_seg('5');
-        __delay_ms(200);
-        update_seg('6');
-        __delay_ms(200);
-        update_seg('7');
-        __delay_ms(200);
-        update_seg('8');
-        __delay_ms(200);
-        update_seg('9');
-        __delay_ms(200);
+        
 
 
 
     }
 }
 
-void update_seg(char valor) {
+void update_seg(char seg, char valor) {
     clear();
 
     switch (valor) {
@@ -143,6 +133,51 @@ void update_seg(char valor) {
             RD_SetHigh();
             RF_SetHigh();
             RG_SetHigh();
+            break;
+        case 'A':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+            case 'B':
+            RC_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case 'E':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case 'F':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case 'G':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        default :
+            clear();
             break;
 
     }
