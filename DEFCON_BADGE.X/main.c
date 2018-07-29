@@ -4,12 +4,13 @@
 void update_seg(char seg, char valor);
 void clear(void);
 void states(void);
+void load_msg(void);
 
 char state = 1;
-int count = 0;
-int TH = 1;
+uint8_t count = 0;
+uint8_t TH = 1;
 char msg[20];
-int x = 0;
+uint8_t x = 0;
 
 void interrupt INTERRUPT_InterruptManager(void) {
 
@@ -20,7 +21,7 @@ void interrupt INTERRUPT_InterruptManager(void) {
             count = 0;
             states();
         }
-        update_seg(1, msg[x]);
+        //update_seg(1, msg[x]);
         TMR1_ISR();
     } else {
 
@@ -46,19 +47,44 @@ void main(void) {
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
 
-
+    load_msg();
     while (1) {
-        msg[0] = '1';
-        msg[1] = 'A';
-        x = 0;
+
+        update_seg(1, msg[x]);
         __delay_ms(200);
-        x = 1;
-        __delay_ms(200);
-        
+        x++;
+        if (x > 20) {
+            x = 0;
+        }
+
 
 
 
     }
+}
+
+void load_msg(void) {
+    msg[0] = '0';
+    msg[1] = '1';
+    msg[2] = '2';
+    msg[3] = '3';
+    msg[4] = '4';
+    msg[5] = '5';
+    msg[6] = '6';
+    msg[7] = '7';
+    msg[8] = '8';
+    msg[9] = '9';
+    msg[10] = 'A';
+    msg[11] = 'B';
+    msg[12] = 'C';
+    msg[13] = 'D';
+    msg[14] = 'E';
+    msg[15] = 'F';
+    msg[16] = 'H';
+    msg[17] = 'A';
+    msg[18] = 'A';
+    msg[19] = 'A';
+    msg[20] = 'A';
 }
 
 void update_seg(char seg, char valor) {
@@ -142,17 +168,28 @@ void update_seg(char seg, char valor) {
             RF_SetHigh();
             RG_SetHigh();
             break;
-            case 'B':
+        case 'B':
             RC_SetHigh();
             RD_SetHigh();
             RE_SetHigh();
             RF_SetHigh();
             RG_SetHigh();
             break;
-        case 'E':
+        case 'C':
             RA_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            break;
+        case 'D':
             RB_SetHigh();
             RC_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RG_SetHigh();
+            break;
+        case 'E':
+            RA_SetHigh();
             RD_SetHigh();
             RE_SetHigh();
             RF_SetHigh();
@@ -160,9 +197,13 @@ void update_seg(char seg, char valor) {
             break;
         case 'F':
             RA_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case 'H':
             RB_SetHigh();
             RC_SetHigh();
-            RD_SetHigh();
             RE_SetHigh();
             RF_SetHigh();
             RG_SetHigh();
@@ -176,9 +217,7 @@ void update_seg(char seg, char valor) {
             RF_SetHigh();
             RG_SetHigh();
             break;
-        default :
-            clear();
-            break;
+
 
     }
 
