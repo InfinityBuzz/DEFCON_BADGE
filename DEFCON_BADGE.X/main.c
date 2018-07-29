@@ -1,7 +1,7 @@
 
 
 #include "mcc_generated_files/mcc.h"
-void update_seg(int valor);
+void update_seg(char valor);
 void clear(void);
 void states(void);
 
@@ -42,10 +42,28 @@ void main(void) {
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
-    update_seg(1);
+    
     
     while (1) {
-        
+        update_seg('0');
+        __delay_ms(200);
+        update_seg('1');
+        __delay_ms(200);
+        update_seg('2');
+        __delay_ms(200);
+        update_seg('3');
+        __delay_ms(200);
+        update_seg('4');
+        __delay_ms(200);
+        update_seg('5');
+        __delay_ms(200);
+        update_seg('6');
+        __delay_ms(200);
+        update_seg('7');
+        __delay_ms(200);
+        update_seg('8');
+        __delay_ms(200);
+        update_seg('9');
         __delay_ms(200);
 
 
@@ -53,62 +71,78 @@ void main(void) {
     }
 }
 
-void update_seg(int valor) {
+void update_seg(char valor) {
     clear();
 
     switch (valor) {
-        case 0:
-            break;
-        case 1:
-            RB_SetHigh();
-            RC_SetHigh();
-            break;
-        case 2:
-            RA_SetHigh();
-            RB_SetHigh();
-            RD_SetHigh();
-            RE_SetHigh();
-            RG_SetHigh();
-            break;
-        case 3:
-            RA_SetHigh();
-            RB_SetHigh();
-            RC_SetHigh();
-            RD_SetHigh();
-            RG_SetHigh();
-            break;
-        case 4:
-            break;
-        case 5:
-            RA_SetHigh();
-            RC_SetHigh();
-            RD_SetHigh();
-            RF_SetHigh();
-            RG_SetHigh();
-            break;
-        case 6:
-            RA_SetHigh();
-            RC_SetHigh();
-            RD_SetHigh();
-            RE_SetHigh();
-            RF_SetHigh();
-            RG_SetHigh();
-            break;
-        case 7:
-            RA_SetHigh();
-            RB_SetHigh();
-            RC_SetHigh();
-            break;
-        case 8:
+        case '0':
             RA_SetHigh();
             RB_SetHigh();
             RC_SetHigh();
             RD_SetHigh();
             RE_SetHigh();
             RF_SetHigh();
+            break;
+        case '1':
+            RB_SetHigh();
+            RC_SetHigh();
+            break;
+        case '2':
+            RA_SetHigh();
+            RB_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
             RG_SetHigh();
             break;
-        case 9:
+        case '3':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RG_SetHigh();
+            break;
+        case '4':
+            RB_SetHigh();
+            RC_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case '5':
+            RA_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case '6':
+            RA_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case '7':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            break;
+        case '8':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RE_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
+            break;
+        case '9':
+            RA_SetHigh();
+            RB_SetHigh();
+            RC_SetHigh();
+            RD_SetHigh();
+            RF_SetHigh();
+            RG_SetHigh();
             break;
 
     }
